@@ -1,0 +1,27 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+export default function BottomNavbar({
+  href,
+  title,
+  icon,
+  urlPath,
+  className = "",
+  iconColor,
+  circleNav,
+}) {
+  return (
+    <a
+      href={href}
+      className={(urlPath === href ? `active-nav` : "") + className}
+    >
+      <FontAwesomeIcon color={iconColor} icon={icon} />
+      <span>{title}</span>
+      {urlPath === href && <em></em>}
+      {circleNav === true && (
+        <strong>
+          <u></u>
+        </strong>
+      )}
+    </a>
+  );
+}
