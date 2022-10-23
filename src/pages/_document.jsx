@@ -29,14 +29,33 @@ export default function DefaultDocument(props) {
         </div>
         <div id="page">
           <div className="header header-fixed header-logo-center">
-            <a href="index.html" className="header-title">Starter</a>
-            <a href="#" data-back-button className="header-icon header-icon-1"><i
-              className="fas fa-chevron-left"></i></a>
-            <a href="#" data-menu="menu-main" className="header-icon header-icon-4"><i className="fas fa-bars"></i></a>
-            <a href="#" data-toggle-theme className="header-icon header-icon-3 show-on-theme-dark"><i
-              className="fas fa-sun"></i></a>
-            <a href="#" data-toggle-theme className="header-icon header-icon-3 show-on-theme-light"><i
-              className="fas fa-moon"></i></a>
+            <a href="index.html" className="header-title">
+              Starter
+            </a>
+            <a href="#" data-back-button className="header-icon header-icon-1">
+              <i className="fas fa-chevron-left"></i>
+            </a>
+            <a
+              href="#"
+              data-menu="menu-main"
+              className="header-icon header-icon-4"
+            >
+              <i className="fas fa-bars"></i>
+            </a>
+            <a
+              href="#"
+              data-toggle-theme
+              className="header-icon header-icon-3 show-on-theme-dark"
+            >
+              <i className="fas fa-sun"></i>
+            </a>
+            <a
+              href="#"
+              data-toggle-theme
+              className="header-icon header-icon-3 show-on-theme-light"
+            >
+              <i className="fas fa-moon"></i>
+            </a>
           </div>
 
           <div id="footer-bar" className="footer-bar-6">
