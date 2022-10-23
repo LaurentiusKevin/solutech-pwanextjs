@@ -127,12 +127,12 @@ export default function PageUserEdit() {
                     className="w-100"
                     screenshotFormat="image/jpeg"
                     audio={false}
-                    // ref={webcamRef}
+                    ref={webcamRef}
                     videoConstraints={videoConstraints}
                   />
                   <button
                     className="btn btn-full btn-m gradient-brown rounded-s font-13 font-600 mt-4"
-                    // onClick={capture}
+                    onClick={capture}
                   >
                     <FontAwesomeIcon icon={faCamera} size="lg" />
                   </button>
