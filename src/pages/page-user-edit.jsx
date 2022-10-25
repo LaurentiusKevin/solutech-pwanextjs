@@ -196,6 +196,7 @@ export default function PageUserEdit() {
                   <input
                     type="text"
                     className="form-control validate-name"
+                    defaultValue={userData.name ?? ""}
                     onChange={(event) => {
                       setUserData({
                         ...userData,
@@ -211,6 +212,7 @@ export default function PageUserEdit() {
                   <input
                     type="text"
                     className="form-control validate-name"
+                    defaultValue={userData.position ?? ""}
                     onChange={(event) => {
                       setUserData({
                         ...userData,
