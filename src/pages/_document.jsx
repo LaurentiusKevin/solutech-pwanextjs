@@ -20,8 +20,9 @@ export default function DefaultDocument(props) {
     <Html lang="en">
       <Head>
         <meta charSet="utf-8" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="76x76" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/icon/solutech-pwanextjs-36x36.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="/icon/solutech-pwanextjs-72x72.png" />
+        <link rel='manifest' href='/manifest.json' />
       </Head>
       <body className="theme-light">
         <div id="preloader">

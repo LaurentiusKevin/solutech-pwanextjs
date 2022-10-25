@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Webcam from "react-webcam";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
-import { createData, getData } from "../config/firebase-db";
+import { createData, getData } from "../config/firestore";
 
 const defaultCameraConfig = {
   active: false,
@@ -60,7 +60,7 @@ export default function PageUserEdit() {
   };
 
   const handleUpdateData = () => {
-    createData(1, {
+    createData("wR7xWHbJhiOusqLwvFAF", {
       ...userData,
     }).then((r) => {
       handleGetData();
@@ -68,18 +68,14 @@ export default function PageUserEdit() {
   };
 
   const handleGetData = () => {
-    getData(1).then((r) => {
-      setUserData({
-        name: r.name,
-        position: r.position,
-        description: r.description,
-      });
+    getData("wR7xWHbJhiOusqLwvFAF").then((r) => {
+      setUserData(r)
     });
   };
 
   useEffect(() => {
     handleGetData();
-  }, [userData]);
+  }, []);
 
   return (
     <>
@@ -92,10 +88,10 @@ export default function PageUserEdit() {
               id="profilePicture"
             />
             <div className="p-2">
-              <p className="font-600 color-highlight mb-n2">Development</p>
-              <h4 className="pt-2">Mr. Enabled</h4>
+              <p className="font-600 color-highlight mb-n2">{userData.position ?? 'Development'}</p>
+              <h4 className="pt-2">{userData.name ?? 'Mr. Enabled'}</h4>
               <p className="mb-2">
-                Husband and front end developer at Enabled.
+                {userData.description ?? 'Husband and front end developer at Enabled.'}
               </p>
               <button
                 id="changeProfilePict"
@@ -205,7 +201,6 @@ export default function PageUserEdit() {
                         ...userData,
                         name: event.currentTarget?.value,
                       });
-                      handleUpdateData();
                     }}
                   />
                   <label htmlFor="form1" className="color-highlight">
@@ -221,7 +216,6 @@ export default function PageUserEdit() {
                         ...userData,
                         position: event.currentTarget?.value,
                       });
-                      handleUpdateData();
                     }}
                   />
                   <label htmlFor="form1" className="color-highlight">
@@ -238,7 +232,6 @@ export default function PageUserEdit() {
                         ...userData,
                         description: event.currentTarget?.value,
                       });
-                      handleUpdateData();
                     }}
                   />
                   <label htmlFor="form1" className="color-highlight">
@@ -247,12 +240,13 @@ export default function PageUserEdit() {
                 </div>
               </div>
 
-              <a
-                href="#"
+              <button
+                type="button"
                 className="btn btn-full btn-m gradient-highlight rounded-s font-13 font-600 mt-4"
+                onClick={handleUpdateData}
               >
                 Save Basic Information
-              </a>
+              </button>
             </div>
           </div>
         </div>

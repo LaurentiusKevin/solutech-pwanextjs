@@ -2,7 +2,6 @@ import { db } from "./firebase";
 import { ref, set, get, child } from "firebase/database";
 
 export const createData = async (userId, data) => {
-  console.log(data);
   await set(ref(db, "users/" + userId), data);
 };
 
