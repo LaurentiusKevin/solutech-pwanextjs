@@ -1,14 +1,34 @@
-import { useState } from "react";
-import {register} from "../../config/firebase-auth";
+import { authRegister } from "../../config/firebase-auth";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const formSchema = yup
+  .object({
+    email: yup.string().email().required(),
+    password: yup.string().min(6).required(),
+  })
+  .required();
 
 export default function UserRegister(props) {
-  const [userData, setUserData] = useState({ email: "", password: "" });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(formSchema),
+  });
 
-  const handleUpdateData = () => {
-    console.log(userData);
-    register(userData).then(r => {
-      console.log(r)
-    })
+  const onSubmit = (data) => {
+    authRegister(data)
+      .then((r) => {
+        reset();
+      })
+      .catch((e) => {
+        if (e.code === "auth/email-already-in-use") {
+        }
+      });
   };
 
   return (
@@ -22,46 +42,41 @@ export default function UserRegister(props) {
           <p>Register using email and password</p>
 
           <div className="mt-5 mb-3">
-            <div className="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-              <input
-                type="text"
-                className="form-control validate-name"
-                defaultValue={userData.email}
-                onChange={(event) => {
-                  setUserData({
-                    ...userData,
-                    email: event.currentTarget?.value,
-                  });
-                }}
-              />
-              <label htmlFor="form1" className="color-highlight">
-                Email
-              </label>
-            </div>
-            <div className="input-style has-borders no-icon input-style-always-active validate-field mb-4">
-              <input
-                type="password"
-                className="form-control validate-name"
-                defaultValue={userData.password}
-                onChange={(event) => {
-                  setUserData({
-                    ...userData,
-                    password: event.currentTarget?.value,
-                  });
-                }}
-              />
-              <label htmlFor="form1" className="color-highlight">
-                Password
-              </label>
-            </div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="input-style has-borders no-icon input-style-always-active validate-field mb-4">
+                <input
+                  {...register("email")}
+                  type="text"
+                  className="form-control validate-name"
+                />
+                <label htmlFor="form1" className="color-highlight">
+                  Email
+                </label>
+                {errors.email && (
+                  <p className="text-danger">{errors.email.message}</p>
+                )}
+              </div>
+              <div className="input-style has-borders no-icon input-style-always-active validate-field mb-4">
+                <input
+                  {...register("password")}
+                  type="password"
+                  className="form-control validate-name"
+                />
+                <label htmlFor="form1" className="color-highlight">
+                  Password
+                </label>
+                {errors.password && (
+                  <p className="text-danger">{errors.password.message}</p>
+                )}
+              </div>
 
-            <button
-              type="button"
-              className="btn btn-full btn-m gradient-highlight rounded-s font-13 font-600 mt-4"
-              onClick={handleUpdateData}
-            >
-              Register
-            </button>
+              <button
+                type="submit"
+                className="btn btn-full btn-m gradient-highlight rounded-s font-13 font-600 mt-4"
+              >
+                Register
+              </button>
+            </form>
           </div>
         </div>
       </div>

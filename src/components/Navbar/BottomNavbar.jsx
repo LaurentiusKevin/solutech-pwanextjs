@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 
 export default function BottomNavbar({
   href,
@@ -10,18 +11,17 @@ export default function BottomNavbar({
   circleNav,
 }) {
   return (
-    <a
-      href={href}
-      className={(urlPath === href ? `active-nav` : "") + className}
-    >
-      <FontAwesomeIcon color={iconColor} icon={icon} />
-      <span>{title}</span>
-      {urlPath === href && <em></em>}
-      {circleNav === true && (
-        <strong>
-          <u></u>
-        </strong>
-      )}
-    </a>
+    <Link href={href} shallow={true}>
+      <a className={(urlPath === href ? `active-nav` : "") + className}>
+        <FontAwesomeIcon color={iconColor} icon={icon} />
+        <span>{title}</span>
+        {urlPath === href && <em></em>}
+        {circleNav === true && (
+          <strong>
+            <u></u>
+          </strong>
+        )}
+      </a>
+    </Link>
   );
 }

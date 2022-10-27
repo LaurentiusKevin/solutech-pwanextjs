@@ -5,13 +5,13 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 config.autoAddCss = false;
 
 function MyApp({ Component, pageProps }) {
   const { asPath } = useRouter();
-  // const customScript = dynamic(() => import("../../public/scripts/custom"))
-
+  const queryClient = new QueryClient();
   pageProps = {
     ...pageProps,
     asPath,
@@ -19,8 +19,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <React.Fragment>
-      <Component {...pageProps} />
-      {/*<customScript />*/}
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
     </React.Fragment>
   );
 }
