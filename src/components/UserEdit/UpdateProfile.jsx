@@ -1,9 +1,5 @@
 export default function UpdateProfile(props) {
-  const {
-    userData,
-    setUserData,
-    handleUpdateData
-  } = props
+  const { userData, setUserData, handleUpdateData } = props;
 
   return (
     <div className="col-sm-12 col-lg-4">
@@ -14,8 +10,8 @@ export default function UpdateProfile(props) {
           </p>
           <h4>Basic Information</h4>
           <p>
-            Public information that shows on top of your card in your
-            profile page. This is just a dummy page.
+            Public information that shows on top of your card in your profile
+            page. This is just a dummy page.
           </p>
 
           <div className="mt-5 mb-3">
@@ -79,5 +75,5 @@ export default function UpdateProfile(props) {
         </div>
       </div>
     </div>
-  )
+  );
 }

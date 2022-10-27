@@ -1,8 +1,5 @@
 export default function LocationUserData(props) {
-  const {
-    getLocation,
-    location,
-  } = props
+  const { getLocation, location } = props;
 
   return (
     <div className="col-sm-12 col-lg-4">
@@ -25,5 +22,5 @@ export default function LocationUserData(props) {
         </div>
       </div>
     </div>
-  )
+  );
 }

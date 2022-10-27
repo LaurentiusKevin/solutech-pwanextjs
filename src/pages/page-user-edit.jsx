@@ -7,6 +7,7 @@ import UpdateProfile from "../components/UserEdit/UpdateProfile";
 import CameraUserEdit from "../components/UserEdit/CameraUserEdit";
 import LocationUserData from "../components/UserEdit/LocationUserData";
 import ProfileUserData from "../components/UserEdit/ProfileUserData";
+import UserRegister from "../components/UserEdit/UserRegister";
 
 const defaultCameraConfig = {
   active: false,
@@ -73,7 +74,7 @@ export default function PageUserEdit(props) {
 
   const handleGetData = () => {
     getData("wR7xWHbJhiOusqLwvFAF").then((r) => {
-      setUserData(r)
+      setUserData(r);
     });
   };
 
@@ -93,7 +94,7 @@ export default function PageUserEdit(props) {
     capture,
     getLocation,
     location,
-  }
+  };
 
   return (
     <>
@@ -102,6 +103,7 @@ export default function PageUserEdit(props) {
         <LocationUserData {...props} />
         <CameraUserEdit {...props} />
         <UpdateProfile {...props} />
+        <UserRegister />
       </div>
     </>
   );

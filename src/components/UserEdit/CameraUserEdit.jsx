@@ -1,15 +1,10 @@
 import Webcam from "react-webcam";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCamera} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 export default function CameraUserEdit(props) {
-  const {
-    cameraData,
-    setCameraData,
-    webcamRef,
-    videoConstraints,
-    capture,
-  } = props
+  const { cameraData, setCameraData, webcamRef, videoConstraints, capture } =
+    props;
 
   return (
     <div className="col-sm-12 col-lg-4">
@@ -29,12 +24,12 @@ export default function CameraUserEdit(props) {
                   <option key={key} value={item.deviceId.toString()}>
                     {item.label} - Device {key + 1}
                   </option>
-                )
+                );
               })}
             </select>
             <span>
-                  <i className="fa fa-chevron-down"></i>
-                </span>
+              <i className="fa fa-chevron-down"></i>
+            </span>
           </div>
 
           {cameraData.active === true && (
@@ -70,5 +65,5 @@ export default function CameraUserEdit(props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
