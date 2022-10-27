@@ -8,6 +8,7 @@ import CameraUserEdit from "../components/UserEdit/CameraUserEdit";
 import LocationUserData from "../components/UserEdit/LocationUserData";
 import ProfileUserData from "../components/UserEdit/ProfileUserData";
 import UserRegister from "../components/UserEdit/UserRegister";
+import UserSignIn from "../components/UserEdit/UserSignIn";
 
 const defaultCameraConfig = {
   active: false,
@@ -104,6 +105,7 @@ export default function PageUserEdit(props) {
         <CameraUserEdit {...props} />
         <UpdateProfile {...props} />
         <UserRegister />
+        <UserSignIn />
       </div>
     </>
   );
