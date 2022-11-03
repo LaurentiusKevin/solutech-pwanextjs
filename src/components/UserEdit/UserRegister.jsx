@@ -12,6 +12,10 @@ const formSchema = yup
 
 export default function UserRegister(props) {
   const {
+    onSubmit
+  } = props
+
+  const {
     register,
     handleSubmit,
     reset,
@@ -19,17 +23,6 @@ export default function UserRegister(props) {
   } = useForm({
     resolver: yupResolver(formSchema),
   });
-
-  const onSubmit = (data) => {
-    authRegister(data)
-      .then((r) => {
-        reset();
-      })
-      .catch((e) => {
-        if (e.code === "auth/email-already-in-use") {
-        }
-      });
-  };
 
   return (
     <div className="col-sm-12 col-lg-4">

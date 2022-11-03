@@ -2,6 +2,9 @@ import { authSignIn} from "../../config/firebase-auth";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import {setCookie} from "nookies";
+import {useRouter} from "next/router";
+import Link from "next/link";
 
 const formSchema = yup
   .object({
@@ -12,6 +15,10 @@ const formSchema = yup
 
 export default function UserSignIn(props) {
   const {
+    onSubmit
+  } = props
+
+  const {
     register,
     handleSubmit,
     reset,
@@ -19,17 +26,6 @@ export default function UserSignIn(props) {
   } = useForm({
     resolver: yupResolver(formSchema),
   });
-
-  const onSubmit = (data) => {
-    authSignIn(data)
-      .then((r) => {
-        reset();
-      })
-      .catch((e) => {
-        if (e.code === "auth/email-already-in-use") {
-        }
-      });
-  };
 
   return (
     <div className="col-sm-12 col-lg-4">
@@ -41,7 +37,7 @@ export default function UserSignIn(props) {
           <h4>Firebase Authentication</h4>
           <p>Login using email and password</p>
 
-          <div className="mt-5 mb-3">
+          <div className="mt-5">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="input-style has-borders no-icon input-style-always-active validate-field mb-4">
                 <input
@@ -70,13 +66,18 @@ export default function UserSignIn(props) {
                 )}
               </div>
 
-              <button
-                type="submit"
-                className="btn btn-full btn-m gradient-highlight rounded-s font-13 font-600 mt-4"
-              >
-                Sign In
-              </button>
+              <div className="d-grid">
+                <button
+                  type="submit"
+                  className="btn btn-full btn-m gradient-highlight rounded-s font-13 font-600"
+                >
+                  Sign In
+                </button>
+              </div>
             </form>
+            <Link href="/auth/register">
+              <a className="btn text-primary btn-m font-13 font-600 mt-1">Register</a>
+            </Link>
           </div>
         </div>
       </div>

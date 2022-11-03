@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Webcam from "react-webcam";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { createData, getData } from "../config/firestore";
 import UpdateProfile from "../components/UserEdit/UpdateProfile";
 import CameraUserEdit from "../components/UserEdit/CameraUserEdit";
@@ -9,6 +6,7 @@ import LocationUserData from "../components/UserEdit/LocationUserData";
 import ProfileUserData from "../components/UserEdit/ProfileUserData";
 import UserRegister from "../components/UserEdit/UserRegister";
 import UserSignIn from "../components/UserEdit/UserSignIn";
+import nookies from "nookies";
 
 const defaultCameraConfig = {
   active: false,
@@ -109,4 +107,23 @@ export default function PageUserEdit(props) {
       </div>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const cookies = nookies.get(context)
+
+  if (cookies.accessToken === undefined) {
+    return {
+      redirect: {
+        destination: '/auth/login'
+      }
+    }
+  }
+
+  return {
+    props: {
+      email: cookies.email,
+      token: cookies.accessToken
+    }
+  }
 }
