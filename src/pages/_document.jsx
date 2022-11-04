@@ -1,7 +1,6 @@
 import { Html, Main, Head, NextScript } from "next/document";
 import BottomNavbar from "../components/Navbar/BottomNavbar";
 import {
-  faBars,
   faCamera,
   faChevronLeft,
   faFile,
@@ -14,6 +13,7 @@ import {
 import Script from "next/script";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 
 export default function DefaultDocument(props) {
   return (
@@ -34,11 +34,13 @@ export default function DefaultDocument(props) {
         </div>
         <div id="page">
           <div className="header header-fixed header-logo-center">
-            <a href="index.html" className="header-title">
-              Starter
-            </a>
+            <Link href="/">
+              <a className="header-title">
+                {props.pageInfo?.title ?? "Starter"}
+              </a>
+            </Link>
             <a href="#" data-back-button className="header-icon header-icon-1">
-              <i className="fas fa-chevron-left"></i>
+              <FontAwesomeIcon icon={faChevronLeft} />
             </a>
             <a
               href="#"
@@ -65,7 +67,7 @@ export default function DefaultDocument(props) {
 
           <div id="footer-bar" className="footer-bar-6">
             <BottomNavbar
-              href="/index-components"
+              href="/feature"
               title="Features"
               icon={faLayerGroup}
               urlPath={props.asPath}
@@ -92,7 +94,7 @@ export default function DefaultDocument(props) {
               urlPath={props.asPath}
             />
             <BottomNavbar
-              href="/page-user-edit"
+              href="/profile"
               title="Profile"
               icon={faUser}
               urlPath={props.asPath}

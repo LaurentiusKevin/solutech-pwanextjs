@@ -1,9 +1,6 @@
-import { authSignIn} from "../../config/firebase-auth";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {setCookie} from "nookies";
-import {useRouter} from "next/router";
 import Link from "next/link";
 
 const formSchema = yup
@@ -14,14 +11,11 @@ const formSchema = yup
   .required();
 
 export default function UserSignIn(props) {
-  const {
-    onSubmit
-  } = props
+  const { onSubmit, loginErrorMessage, setLoginErrorMessage } = props;
 
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(formSchema),
@@ -31,13 +25,14 @@ export default function UserSignIn(props) {
     <div className="col-sm-12 col-lg-4">
       <div className="card card-style">
         <div className="content">
-          <p className="mb-n1 color-highlight font-600 font-12">
-            Sign In
-          </p>
+          <p className="mb-n1 color-highlight font-600 font-12">Sign In</p>
           <h4>Firebase Authentication</h4>
           <p>Login using email and password</p>
 
           <div className="mt-5">
+            {loginErrorMessage !== "" && (
+              <div className="alert alert-danger">{loginErrorMessage}</div>
+            )}
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="input-style has-borders no-icon input-style-always-active validate-field mb-4">
                 <input
@@ -76,7 +71,9 @@ export default function UserSignIn(props) {
               </div>
             </form>
             <Link href="/auth/register">
-              <a className="btn text-primary btn-m font-13 font-600 mt-1">Register</a>
+              <a className="btn text-primary btn-m font-13 font-600 mt-1">
+                Register
+              </a>
             </Link>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/bootstrap.css";
 import "../../styles/style.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
@@ -10,11 +10,17 @@ import { QueryClient, QueryClientProvider } from "react-query";
 config.autoAddCss = false;
 
 function MyApp({ Component, pageProps }) {
-  const { asPath } = useRouter();
+  const { asPath, back } = useRouter();
+  const [pageInfo, setPageInfo] = useState({
+    title: "Solutech PWA Demo NextJs",
+  });
   const queryClient = new QueryClient();
+
   pageProps = {
     ...pageProps,
     asPath,
+    pageInfo,
+    setPageInfo,
   };
 
   return (

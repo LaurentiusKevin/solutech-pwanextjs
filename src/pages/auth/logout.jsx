@@ -1,25 +1,23 @@
 import nookies from "nookies";
 
 export default function AuthLogout() {
-  return (
-    <></>
-  )
+  return <></>;
 }
 
 export async function getServerSideProps(context) {
-  nookies.destroy(null, 'accessToken',{
-    path: '/'
+  nookies.destroy(context, "accessToken", {
+    path: "/",
   });
-  nookies.destroy(null, 'email',{
-    path: '/'
+  nookies.destroy(context, "email", {
+    path: "/",
   });
-  nookies.destroy(null, 'uid',{
-    path: '/'
+  nookies.destroy(context, "uid", {
+    path: "/",
   });
 
   return {
     redirect: {
-      destination: '/'
-    }
-  }
+      destination: "/",
+    },
+  };
 }

@@ -11,9 +11,7 @@ const formSchema = yup
   .required();
 
 export default function UserRegister(props) {
-  const {
-    onSubmit
-  } = props
+  const { onSubmit } = props;
 
   const {
     register,

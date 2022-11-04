@@ -7,7 +7,7 @@ export default function CameraUserEdit(props) {
     props;
 
   return (
-    <div className="col-sm-12 col-lg-4">
+    <div className="col-sm-12 col-lg-5">
       <div className="card card-style">
         <div className="content">
           <p className="mb-n1 color-highlight font-600 font-12">Camera</p>

@@ -27,7 +27,7 @@ const defaultUserData = {
   description: "",
 };
 
-export default function PageUserEdit(props) {
+export default function Feature(props) {
   const [location, setLocation] = useState({ latitude: 0, longitude: 0 });
   const [cameraData, setCameraData] = useState(defaultCameraConfig);
   const [userData, setUserData] = useState(defaultUserData);

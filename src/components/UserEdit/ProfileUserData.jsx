@@ -2,7 +2,7 @@ export default function ProfileUserData(props) {
   const { cameraData, userData } = props;
 
   return (
-    <div className="col-sm-12 col-lg-4">
+    <div className="col-sm-12 col-lg-5">
       <div className="card card-style">
         <img
           src={cameraData.imageDataUrl}
