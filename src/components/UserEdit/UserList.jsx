@@ -1,7 +1,5 @@
 export default function UserList(props) {
-  const {
-    allUserData
-  } = props
+  const { allUserData } = props;
   return (
     <div className="col-12">
       {allUserData.length === 0 && (
@@ -17,17 +15,15 @@ export default function UserList(props) {
             <div className="card card-style">
               <div className="content">
                 <p className="mb-n1 color-highlight font-600 font-12">
-                  {item.position ?? '- no position -'}
+                  {item.position ?? "- no position -"}
                 </p>
                 <h4>{item.name}</h4>
-                <p>
-                  {item.description ?? '- no description -'}
-                </p>
+                <p>{item.description ?? "- no description -"}</p>
               </div>
             </div>
           </div>
         ))}
       </div>
     </div>
-  )
+  );
 }

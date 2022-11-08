@@ -22,7 +22,7 @@ export const getData = async (id) => {
 export const getAllData = async () => {
   try {
     const userRef = collection(firestore, "user");
-    return (await getDocs(userRef));
+    return await getDocs(userRef);
   } catch (e) {
     console.log("failed to get data: ", e);
   }

@@ -15,10 +15,7 @@ export default function ProfileUserData(props) {
             {userData?.position ?? "Position not set"}
           </p>
           <h4 className="pt-2">{userData?.name ?? "Name not set"}</h4>
-          <p className="mb-2">
-            {props.email ??
-              "Email not found"}
-          </p>
+          <p className="mb-2">{props.email ?? "Email not found"}</p>
           <p className="mb-2">
             {userData?.description ??
               "Husband and front end developer at Enabled."}
