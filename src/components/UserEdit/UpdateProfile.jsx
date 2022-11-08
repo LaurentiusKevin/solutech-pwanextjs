@@ -19,7 +19,7 @@ export default function UpdateProfile(props) {
               <input
                 type="text"
                 className="form-control validate-name"
-                defaultValue={userData.name ?? ""}
+                defaultValue={userData?.name ?? ""}
                 onChange={(event) => {
                   setUserData({
                     ...userData,
@@ -35,7 +35,7 @@ export default function UpdateProfile(props) {
               <input
                 type="text"
                 className="form-control validate-name"
-                defaultValue={userData.position ?? ""}
+                defaultValue={userData?.position ?? ""}
                 onChange={(event) => {
                   setUserData({
                     ...userData,
@@ -51,7 +51,7 @@ export default function UpdateProfile(props) {
               <input
                 type="text"
                 className="form-control validate-name"
-                defaultValue={userData.description ?? ""}
+                defaultValue={userData?.description ?? ""}
                 onChange={(event) => {
                   setUserData({
                     ...userData,

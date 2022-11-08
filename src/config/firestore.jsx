@@ -1,4 +1,4 @@
-import { setDoc, doc, collection, getDoc } from "firebase/firestore";
+import { setDoc, doc, collection, getDoc, getDocs } from "firebase/firestore";
 import { firestore } from "./firebase";
 
 export const createData = async (id, data) => {
@@ -14,6 +14,15 @@ export const getData = async (id) => {
   try {
     const userRef = doc(firestore, "user", id);
     return (await getDoc(userRef)).data();
+  } catch (e) {
+    console.log("failed to get data: ", e);
+  }
+};
+
+export const getAllData = async () => {
+  try {
+    const userRef = collection(firestore, "user");
+    return (await getDocs(userRef));
   } catch (e) {
     console.log("failed to get data: ", e);
   }

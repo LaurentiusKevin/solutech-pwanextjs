@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import {getStorage} from "firebase/storage"
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBIX-QYQ9VyORUj1b9pVLDYz9sMhtyTec8",
@@ -19,3 +20,4 @@ const app = initializeApp(firebaseConfig, "solutech");
 export const db = getDatabase(app);
 export const firestore = getFirestore(app);
 export const firebaseAuth = getAuth(app);
+export const firebaseStorage = getStorage(app)

@@ -12,11 +12,15 @@ export default function ProfileUserData(props) {
         />
         <div className="p-2">
           <p className="font-600 color-highlight mb-n2">
-            {userData.position ?? "Development"}
+            {userData?.position ?? "Position not set"}
           </p>
-          <h4 className="pt-2">{userData.name ?? "Mr. Enabled"}</h4>
+          <h4 className="pt-2">{userData?.name ?? "Name not set"}</h4>
           <p className="mb-2">
-            {userData.description ??
+            {props.email ??
+              "Email not found"}
+          </p>
+          <p className="mb-2">
+            {userData?.description ??
               "Husband and front end developer at Enabled."}
           </p>
           {/*<button*/}
