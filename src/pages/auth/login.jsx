@@ -3,6 +3,7 @@ import nookies, { setCookie } from "nookies";
 import { authSignIn } from "../../config/firebase-auth";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import {getData} from "../../config/firestore";
 
 export default function AuthLogin(props) {
   const router = useRouter();
@@ -15,7 +16,11 @@ export default function AuthLogin(props) {
         setCookie(null, "email", r.user.email, { path: "/" });
         setCookie(null, "accessToken", r.user.accessToken, { path: "/" });
         setCookie(null, "uid", r.user.uid, { path: "/" });
-        router.push("/");
+        getData(r.user.uid)
+          .then(userData => {
+            setCookie(null, "profile", JSON.stringify(userData), { path: "/" });
+            router.push("/home");
+          })
       })
       .catch((e) => {
         switch (e.code) {

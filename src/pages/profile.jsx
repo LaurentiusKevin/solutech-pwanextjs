@@ -6,7 +6,7 @@ import { createData, getAllData, getData } from "../config/firestore";
 import UpdateProfile from "../components/UserEdit/UpdateProfile";
 import { Button } from "reactstrap";
 import UserList from "../components/UserEdit/UserList";
-import { uploadImage } from "../config/firebase-storage";
+import {getImage, uploadImage} from "../config/firebase-storage";
 
 const defaultCameraConfig = {
   active: false,
@@ -34,10 +34,23 @@ export default function ProfilePage(props) {
   const [allUserData, setAllUserData] = useState([]);
 
   const handleUpdateData = () => {
-    createData(props.uid, userData).then((r) => {
-      handleGetData();
-    });
+    createData(props.uid, userData)
+      .then((r) => {
+        alert("Data saved")
+        handleGetData();
+      });
   };
+
+  const handleSetAdmin = (id, data) => {
+    createData(id, data)
+      .then(r => {
+        handleGetAllData()
+        alert(`User is updated`)
+      })
+      .catch(e => {
+        alert("Failed to update")
+      })
+  }
 
   const handleGetData = () => {
     getData(props.uid).then((r) => {
@@ -53,10 +66,8 @@ export default function ProfilePage(props) {
         let tampung = [];
         r.forEach((item) => {
           tampung.push({
-            email: item.data().email ?? null,
-            name: item.data().name ?? null,
-            description: item.data().description ?? null,
-            position: item.data().position ?? null,
+            uid: item.id,
+            ...item.data()
           });
         });
         setAllUserData(tampung);
@@ -64,23 +75,33 @@ export default function ProfilePage(props) {
     });
   };
 
+  const handleGetImage = () => {
+    getImage(`${props.uid}.jpg`)
+      .then(url => {
+        setCameraData(prevState => ({
+          ...prevState,
+          imageDataUrl: url
+        }))
+      })
+      .catch(e => {
+        setCameraData(prevState => ({
+          ...prevState,
+          imageDataUrl: '/images/pictures/3.jpg'
+        }))
+      })
+  }
+
   const webcamRef = React.useRef(null);
 
   const capture = React.useCallback(async () => {
     const imageSrc = webcamRef.current.getScreenshot();
 
-    uploadImage(imageSrc).then((snapshot) => {
-      console.log(snapshot);
+    uploadImage(`${props.uid}.jpg`, imageSrc).then((snapshot) => {
       alert("profile image uploaded");
     });
-    setCameraData((prevState) => ({
-      ...prevState,
-      imageDataUrl: imageSrc,
-    }));
   }, [webcamRef, setCameraData]);
 
   useEffect(() => {
-    handleGetData();
     setUserData({
       ...userData,
       email: props.email,
@@ -89,6 +110,11 @@ export default function ProfilePage(props) {
 
   useEffect(() => {
     switch (activeTab) {
+      case "profile":
+        handleGetImage();
+        handleGetData();
+        break;
+
       case "user-management":
         handleGetAllData();
         break;
@@ -108,6 +134,7 @@ export default function ProfilePage(props) {
     capture,
     allUserData,
     setAllUserData,
+    handleSetAdmin,
   };
 
   return (
@@ -116,7 +143,7 @@ export default function ProfilePage(props) {
         <div className="d-flex flex-column gap-2">
           <Button
             color={activeTab === "profile" ? "primary" : "secondary"}
-            onClick={(e) => {
+            onClick={() => {
               setActiveTab("profile");
             }}
           >
@@ -124,7 +151,7 @@ export default function ProfilePage(props) {
           </Button>
           <Button
             color={activeTab === "change-image" ? "primary" : "secondary"}
-            onClick={(e) => {
+            onClick={() => {
               setActiveTab("change-image");
             }}
           >
@@ -132,20 +159,22 @@ export default function ProfilePage(props) {
           </Button>
           <Button
             color={activeTab === "update-profile" ? "primary" : "secondary"}
-            onClick={(e) => {
+            onClick={() => {
               setActiveTab("update-profile");
             }}
           >
             Update Profile
           </Button>
-          <Button
-            color={activeTab === "user-management" ? "primary" : "secondary"}
-            onClick={(e) => {
-              setActiveTab("user-management");
-            }}
-          >
-            User List
-          </Button>
+          {props.profile.isAdmin === true &&
+            <Button
+              color={activeTab === "user-management" ? "primary" : "secondary"}
+              onClick={() => {
+                setActiveTab("user-management");
+              }}
+            >
+              User List
+            </Button>
+          }
         </div>
       </div>
       <div className="col-md-9">
@@ -153,7 +182,7 @@ export default function ProfilePage(props) {
           {activeTab === "profile" && <ProfileUserData {...props} />}
           {activeTab === "change-image" && <CameraUserEdit {...props} />}
           {activeTab === "update-profile" && <UpdateProfile {...props} />}
-          {activeTab === "user-management" && <UserList {...props} />}
+          {(activeTab === "user-management" && props.profile.isAdmin === true) && <UserList {...props} />}
         </div>
       </div>
     </div>
@@ -176,6 +205,7 @@ export async function getServerSideProps(context) {
       email: cookies.email,
       token: cookies.accessToken,
       uid: cookies.uid,
+      profile: JSON.parse(cookies.profile),
     },
   };
 }

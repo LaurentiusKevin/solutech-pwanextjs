@@ -2,17 +2,22 @@ import nookies, { setCookie } from "nookies";
 import UserRegister from "../../components/UserEdit/UserRegister";
 import { authRegister } from "../../config/firebase-auth";
 import { useRouter } from "next/router";
+import {createData} from "../../config/firestore";
 
 export default function AuthLogin(props) {
   const router = useRouter();
   const onSubmit = (data) => {
     authRegister(data)
       .then((r) => {
-        router.push("/auth/login");
+        createData(r.user.uid, {
+          email: r.user.email
+        }).then(r => {
+          alert("User registered")
+          router.push("/auth/login");
+        })
       })
       .catch((e) => {
-        if (e.code === "auth/email-already-in-use") {
-        }
+        alert("Something wrong")
       });
   };
 
@@ -37,10 +42,6 @@ export async function getServerSideProps(context) {
   }
 
   return {
-    props: {
-      email: cookies.email,
-      token: cookies.accessToken,
-      uid: cookies.uid,
-    },
+    props: {},
   };
 }

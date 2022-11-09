@@ -1,8 +1,14 @@
-import { ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes, uploadString, getDownloadURL } from "firebase/storage";
 import { firebaseStorage } from "./firebase";
 
-export const uploadImage = async (file) => {
-  const storageRef = ref(firebaseStorage, "profile-picture");
+export const uploadImage = async (filename, file) => {
+  const storageRef = ref(firebaseStorage, filename);
 
-  return await uploadBytes(storageRef, file);
+  return await uploadString(storageRef, file, "data_url");
 };
+
+export const getImage = async (filename) => {
+  const storageRef = ref(firebaseStorage, filename);
+
+  return await getDownloadURL(storageRef);
+}
