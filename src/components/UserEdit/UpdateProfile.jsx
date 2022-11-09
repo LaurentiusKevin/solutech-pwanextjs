@@ -32,6 +32,40 @@ export default function UpdateProfile(props) {
               </label>
             </div>
             <div className="input-style has-borders no-icon input-style-always-active validate-field mb-4">
+              <select type="text"
+                      className="form-control validate-name"
+                      defaultValue={userData?.gender ?? ""}
+                      onChange={(event) => {
+                        setUserData({
+                          ...userData,
+                          gender: event.currentTarget?.value,
+                        });
+                      }}>
+                <option>Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+              <label htmlFor="form1" className="color-highlight">
+                Gender
+              </label>
+            </div>
+            <div className="input-style has-borders no-icon input-style-always-active validate-field mb-4">
+              <input
+                  type="text"
+                  className="form-control validate-name"
+                  defaultValue={userData?.phone ?? ""}
+                  onChange={(event) => {
+                    setUserData({
+                      ...userData,
+                      phone: event.currentTarget?.value,
+                    });
+                  }}
+              />
+              <label htmlFor="form1" className="color-highlight">
+                Phone
+              </label>
+            </div>
+            <div className="input-style has-borders no-icon input-style-always-active validate-field mb-4">
               <input
                 type="text"
                 className="form-control validate-name"
@@ -45,6 +79,22 @@ export default function UpdateProfile(props) {
               />
               <label htmlFor="form1" className="color-highlight">
                 Position
+              </label>
+            </div>
+            <div className="input-style has-borders no-icon input-style-always-active validate-field mb-4">
+              <textarea
+                  type="text"
+                  className="form-control validate-name"
+                  defaultValue={userData?.address ?? ""}
+                  onChange={(event) => {
+                    setUserData({
+                      ...userData,
+                      address: event.currentTarget?.value,
+                    });
+                  }}
+              />
+              <label htmlFor="form1" className="color-highlight">
+                Address
               </label>
             </div>
             <div className="input-style has-borders no-icon input-style-always-active validate-field mb-4">
