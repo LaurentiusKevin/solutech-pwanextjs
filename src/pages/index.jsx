@@ -133,7 +133,7 @@ export default function IndexPage() {
               Mobile Website
             </h1>
             <p className="color-white font-16 opacity-60 line-height-l boxed-text-l mb-0">
-              We create stunning Mobile Website and PWA's so your website feels
+              We create stunning Mobile Website and PWA&apos;s so your website feels
               like an app and runs as smooth as butter
             </p>
           </div>
@@ -143,7 +143,7 @@ export default function IndexPage() {
           <p className="mb-n1 font-600 color-highlight">Because you Matter!</p>
           <h1>Elite Quality</h1>
           <p>
-            You know you're getting the absolutel best with our products. We've
+            You know you&apos;re getting the absolutel best with our products. We&apos;ve
             been on the market listening to our customers feedback for over 10
             years!
           </p>
@@ -211,7 +211,7 @@ export default function IndexPage() {
             <a className="border-0" href="#">
               <i className="fa font-14 fa-tint rounded-sm shadow-m bg-yellow-dark color-white"></i>
               <span>Color Schemes</span>
-              <strong>It's Just Tap & Change</strong>
+              <strong>It&apos;s Just Tap & Change</strong>
               <i className="fa fa-angle-right"></i>
             </a>
           </div>
