@@ -7,12 +7,14 @@ export default function ProfileUserData(props) {
     <>
       <div className="col-sm-12 col-lg-5">
         <div className="card card-style">
-          <img
-            src={cameraData.imageDataUrl}
-            className="img-fluid"
-            id="profilePicture"
-            alt="profile image"
-          />
+          {cameraData.imageDataUrl &&
+            <img
+              src={cameraData.imageDataUrl}
+              className="img-fluid"
+              id="profilePicture"
+              alt="profile image"
+            />
+          }
           <div className="p-2">
             <p className="font-600 color-highlight mb-n2">
               {userData?.position ?? "Position not set"}
