@@ -182,7 +182,7 @@ export default function ProfilePage(props) {
           {activeTab === "profile" && <ProfileUserData {...props} />}
           {/*{activeTab === "change-image" && <CameraUserEdit {...props} />}*/}
           {activeTab === "update-profile" && <UpdateProfile {...props} />}
-          {(activeTab === "user-management" && props.profile.isAdmin === true) && <UserList {...props} />}
+          {(activeTab === "user-management" && props?.profile?.isAdmin === true) && <UserList {...props} />}
         </div>
       </div>
     </div>
@@ -205,7 +205,7 @@ export async function getServerSideProps(context) {
       email: cookies.email,
       token: cookies.accessToken,
       uid: cookies.uid,
-      profile: JSON.parse(cookies.profile),
+      profile: cookies.profile ?? {},
     },
   };
 }
