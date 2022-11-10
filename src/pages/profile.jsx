@@ -180,7 +180,7 @@ export default function ProfilePage(props) {
       <div className="col-md-9">
         <div className="row justify-content-center">
           {activeTab === "profile" && <ProfileUserData {...props} />}
-          {/*{activeTab === "change-image" && <CameraUserEdit {...props} />}*/}
+          {activeTab === "change-image" && <CameraUserEdit {...props} />}
           {activeTab === "update-profile" && <UpdateProfile {...props} />}
           {(activeTab === "user-management" && props?.profile?.isAdmin === true) && <UserList {...props} />}
         </div>
