@@ -139,7 +139,7 @@ export default function ProfilePage(props) {
 
   return (
     <div className="row">
-      <div className="col-md-3 px-5">
+      <div className="col-md-3 px-5 mb-4">
         <div className="d-flex flex-column gap-2">
           <Button
             color={activeTab === "profile" ? "primary" : "secondary"}
